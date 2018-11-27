@@ -1,4 +1,4 @@
-const https = require('https')
+const https = require('https');
 
 function getAllMoviesData(substr) {
   const titles = [];
@@ -24,7 +24,6 @@ function getAllMoviesData(substr) {
             } else {
               return resolveInner(titles);
             }
-
           });
         }
         
@@ -36,4 +35,4 @@ function getAllMoviesData(substr) {
 
   });
 };
-getAllMoviesData('spiderman').then((result)=> console.log("Movie Titles: ", result.length));
+getAllMoviesData('spiderman').then((result)=> console.log("Movie Titles: ", result));
