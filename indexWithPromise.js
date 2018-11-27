@@ -4,7 +4,7 @@ function getAllMoviesData(substr) {
   const titles = [];
   const pageIdx = 1;
   return new Promise((resolveOuter, rejectOuter) => {
-  
+
     const _getAllMoviesData = function (substr, pageIdx) {
       return new Promise((resolveInner, rejectOuter) => {
         const url = `https://jsonmock.hackerrank.com/api/movies/search/?Title=${substr}&page=${pageIdx}`;
@@ -19,10 +19,11 @@ function getAllMoviesData(substr) {
             movies.forEach(movie => titles.push(movie.Title))
             
             if (pageIdx < parsedData.total_pages) {
-              _getAllMoviesData(substr, pageIdx + 1)
+              return _getAllMoviesData(substr, pageIdx + 1)
                 .then(() => resolveInner(titles));
-            } 
-            resolveInner(titles);
+            } else {
+              return resolveInner(titles);
+            }
 
           });
         }
@@ -35,4 +36,4 @@ function getAllMoviesData(substr) {
 
   });
 };
-getAllMoviesData('spiderman').then((result)=> console.log("Movie Titles: ", result));
+getAllMoviesData('spiderman').then((result)=> console.log("Movie Titles: ", result.length));
